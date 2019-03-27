@@ -21,21 +21,15 @@ app.get("/api/todo", async (req, res) => {
 })
 
 app.post("/api/todo", async (req, res) => {
-    db.todo.insert({ id: uniqid() , text: req.body.text }, function (err) {
-        res.json(createBody(err, {}))
-    })
+    db.todo.insert({ id: uniqid() , text: req.body.text }, err => res.json(createBody(err, {})))
 })
 
 app.delete("/api/todo", async (req, res) => {
-    db.todo.remove({ id: req.body.id }, function (err) {
-        res.json(createBody(err, {}))
-    })
+    db.todo.remove({ id: req.body.id }, err => res.json(createBody(err, {})))
 })
 
 app.put("/api/todo", async (req, res) => {
-    db.todo.update({ id: req.body.id }, { $set: { "text": req.body.text } }, function (err) {
-        res.json(createBody(err, {}))
-    })
+    db.todo.update({ id: req.body.id }, { $set: { "text": req.body.text } }, err =>  res.json(createBody(err, {})))
 })
 
 function createBody(err, obj) {
